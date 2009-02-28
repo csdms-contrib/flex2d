@@ -1,6 +1,4 @@
-#ifdef HAVE_MALLOC_H
-# include<malloc.h>
-#endif
+#include<malloc.h>
 #include<math.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -129,8 +127,8 @@ main()
      lattice_size_x=2048;
      lattice_size_y=4096;
      delta=1.1;   /* km */
-     alpha=50.0;  /* (D/(rho_c*g))^0.25 */
-     delrho=0.27; /* (rho_m-rho_c)/rho_m */
+     alpha=50.0;  /* (D/(rho_c*g))^0.25, in units of multiples of deltax */
+     delrho=0.27; /* (rho_m-rho_c)/rho_c */
      nn=ivector(1,2);
      nn[1]=lattice_size_x;
      nn[2]=lattice_size_y;
