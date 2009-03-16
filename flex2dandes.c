@@ -127,7 +127,7 @@ main()
      lattice_size_x=2048;
      lattice_size_y=4096;
      delta=1.1;   /* km */
-     alpha=50.0;  /* (D/(rho_c*g))^0.25, in units of multiples of deltax */
+     alpha=50.0;  /* (4D/((rho_m-rho_c)*g))^0.25, in units of multiples of delta */
      delrho=0.27; /* (rho_m-rho_c)/rho_c */
      nn=ivector(1,2);
      nn[1]=lattice_size_x;
@@ -143,20 +143,20 @@ main()
      w[1]*=1/delrho;
      w[2]*=1/delrho;
      for (j=1;j<=lattice_size_y/2;j++)
-      {fact=1/(delrho+pow(alpha*j*PI/lattice_size_y,4.0));
+      {fact=1/(delrho+4*delrho*pow(alpha*j*PI/lattice_size_y,4.0));
        w[2*j+1]*=fact;
        w[2*j+2]*=fact;
        w[2*lattice_size_y-2*j+1]*=fact;
        w[2*lattice_size_y-2*j+2]*=fact;}
      for (i=1;i<=lattice_size_x/2;i++)
-      {fact=1/(delrho+pow(alpha*i*PI/lattice_size_x,4.0));
+      {fact=1/(delrho+4*delrho*pow(alpha*i*PI/lattice_size_x,4.0));
        w[2*i*lattice_size_y+1]*=fact;
        w[2*i*lattice_size_y+2]*=fact;
        w[2*lattice_size_x*lattice_size_y-2*i*lattice_size_y+1]*=fact;
        w[2*lattice_size_x*lattice_size_y-2*i*lattice_size_y+2]*=fact;}
      for (i=1;i<=lattice_size_x/2;i++)
       for (j=1;j<=lattice_size_y/2;j++)
-       {fact=1/(delrho+pow(alpha*sqrt((PI*PI*i*i)/(lattice_size_x*lattice_size_x)+
+       {fact=1/(delrho+4*delrho*pow(alpha*sqrt((PI*PI*i*i)/(lattice_size_x*lattice_size_x)+
          (PI*PI*j*j)/(lattice_size_y*lattice_size_y)),4.0));
         w[2*i*lattice_size_y+2*j+1]*=fact;
         w[2*i*lattice_size_y+2*j+2]*=fact;
