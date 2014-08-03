@@ -1,4 +1,8 @@
-#include<malloc.h>
+#include "config.h"
+
+#ifdef HAVE_MALLOC_H
+# include<malloc.h>
+#endif
 #include<math.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -50,7 +54,7 @@ int nrl,nrh,ncl,nch;
 
 #define SWAP(a,b) tempr=(a);(a)=(b);(b)=tempr
 
-void fourn(float data[], unsigned long nn[], int ndim, int isign)
+void fourn(float data[], int nn[], int ndim, int isign)
 {
 	int idim;
 	unsigned long i1,i2,i3,i2rev,i3rev,ip1,ip2,ip3,ifp1,ifp2;
@@ -117,9 +121,11 @@ void fourn(float data[], unsigned long nn[], int ndim, int isign)
 }
 #undef SWAP
 
+int
 main()
 {    float dum,delta,alpha,fact,*w,delrho;
-     int lattice_size_x,lattice_size_y,*nn,i,j;
+     int lattice_size_x,lattice_size_y,i,j;
+     int *nn;
      FILE *fp1,*fp2;
 
      fp1=fopen("load2dandes","r");
